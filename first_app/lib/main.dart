@@ -31,10 +31,13 @@ class _MyAppState extends State<MyApp> {
 
   void _answerQuestion() {
     setState(() {
-      _questionIndex =
-          _questionIndex < questions.length - 1 ? _questionIndex + 1 : 0;
+      if (inRage()) {
+        _questionIndex++;
+      }
     });
   }
+
+  bool inRage() => _questionIndex < questions.length;
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -42,14 +45,18 @@ class _MyAppState extends State<MyApp> {
           appBar: AppBar(
             title: Text('Material app'),
           ),
-          body: Column(
-            children: [
-              Question(questions[_questionIndex]['questionText']),
-              ...(questions[_questionIndex]['answers'] as List<String>)
-                  .map((answer) => Answer(answer, _answerQuestion))
-                  .toList(),
-            ],
-          ),
+          body: inRage()
+              ? Column(
+                  children: [
+                    Question(questions[_questionIndex]['questionText']),
+                    ...(questions[_questionIndex]['answers'] as List<String>)
+                        .map((answer) => Answer(answer, _answerQuestion))
+                        .toList(),
+                  ],
+                )
+              : Center(
+                  child: Text('You did it!'),
+                ),
         ),
       );
 }
