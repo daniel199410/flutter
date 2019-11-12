@@ -1,3 +1,4 @@
+import 'package:first_app/question.dart';
 import 'package:flutter/material.dart';
 
 const questions = ['Q1', 'Q2'];
@@ -16,7 +17,8 @@ class _MyAppState extends State<MyApp> {
 
   void _answerQuestion() {
     setState(() {
-      _questionIndex = _questionIndex < questions.length - 1 ? _questionIndex + 1 : 0;
+      _questionIndex =
+          _questionIndex < questions.length - 1 ? _questionIndex + 1 : 0;
     });
   }
 
@@ -28,7 +30,7 @@ class _MyAppState extends State<MyApp> {
           ),
           body: Column(
             children: [
-              Text(questions.elementAt(_questionIndex)),
+              Question(questions.elementAt(_questionIndex)),
               RaisedButton(
                 child: Text('answer1'),
                 onPressed: _answerQuestion,
