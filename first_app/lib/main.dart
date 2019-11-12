@@ -2,7 +2,20 @@ import 'package:first_app/Answer.dart';
 import 'package:first_app/question.dart';
 import 'package:flutter/material.dart';
 
-const questions = ['Q1', 'Q2'];
+const questions = [
+  {
+    'questionText': 'What\'s your favorite color',
+    'answers': ['Black', 'Red', 'Green', 'White']
+  },
+  {
+    'questionText': 'Who\'s your favorite animal',
+    'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion']
+  },
+  {
+    'questionText': 'Who\'s your favorite instructor',
+    'answers': ['A', 'B', 'C', 'D']
+  }
+];
 
 void main() => runApp(MyApp());
 
@@ -31,10 +44,10 @@ class _MyAppState extends State<MyApp> {
           ),
           body: Column(
             children: [
-              Question(questions.elementAt(_questionIndex)),
-              Answer('a1', _answerQuestion),
-              Answer('a2', _answerQuestion),
-              Answer('a3', _answerQuestion),
+              Question(questions[_questionIndex]['questionText']),
+              ...(questions[_questionIndex]['answers'] as List<String>)
+                  .map((answer) => Answer(answer, _answerQuestion))
+                  .toList(),
             ],
           ),
         ),
