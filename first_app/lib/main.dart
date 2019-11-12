@@ -6,5 +6,12 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => MaterialApp(home: Text('Material App'),);
+  Widget build(BuildContext context) => MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text('Material app'),
+          ),
+          body: Text('Body'),
+        ),
+      );
 }
