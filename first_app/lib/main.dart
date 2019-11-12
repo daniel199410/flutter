@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 
-double addNumbers(double num1, double num2) => num1 + num2;
+const questions = ['Q1', 'Q2'];
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  void answerQuestion() => print('q');
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
+  int questionIndex = 0;
+
+  void answerQuestion() {
+    setState(() {
+      questionIndex = questionIndex < questions.length - 1 ? questionIndex + 1 : 0;
+    });
+  }
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -15,7 +28,7 @@ class MyApp extends StatelessWidget {
           ),
           body: Column(
             children: [
-              Text('The question'),
+              Text(questions.elementAt(questionIndex)),
               RaisedButton(
                 child: Text('answer1'),
                 onPressed: answerQuestion,
